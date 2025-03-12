@@ -21,10 +21,10 @@ import DevImg from "./DevImg";
 export default function Home() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    Array.from({ length: 4 }).forEach((_, index) => {
-      gsap.from(`#project-card-${index}`, {
+    Array.from({ length: 6 }).forEach((_, index) => {
+      gsap.from(`#project-card-${index + 1}`, {
         scrollTrigger: {
-          trigger: `#project-card-${index}`,
+          trigger: `#project-card-${index + 1}`,
           start: "top 70%",
           end: "bottom top",
           toggleActions: "play reverse play reverse",
