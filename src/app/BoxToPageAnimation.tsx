@@ -49,7 +49,6 @@ const BoxToPageAnimation = ({
     // 添加背景裝飾
     const decorations = [];
     for (let i = 0; i < 250; i++) {
-      // 隨機選擇幾何體形狀
       let geometry;
       const shapeType = Math.floor(Math.random() * 4);
       switch (shapeType) {
@@ -66,18 +65,23 @@ const BoxToPageAnimation = ({
           geometry = new THREE.DodecahedronGeometry(0.3);
       }
 
-      // 創建隨機顏色
-      const randomColor = new THREE.Color(
-        Math.random(),
-        Math.random(),
-        Math.random()
-      );
+      // 使用更科幻的顏色組合
+      const colors = [
+        new THREE.Color(0x00ff88), // 霓虹綠
+        new THREE.Color(0x00ffff), // 青色
+        new THREE.Color(0x0088ff), // 明亮藍
+        new THREE.Color(0xff00ff), // 霓虹紫
+        new THREE.Color(0x8800ff), // 深紫
+      ];
+
       const material = new THREE.MeshStandardMaterial({
-        color: randomColor,
+        color: colors[Math.floor(Math.random() * colors.length)],
         opacity: 0.8,
         transparent: true,
-        metalness: 0.3,
-        roughness: 0.7,
+        metalness: 0.9, // 增加金屬感
+        roughness: 0.2, // 降低粗糙度，增加光滑感
+        emissive: colors[Math.floor(Math.random() * colors.length)], // 添加發光效果
+        emissiveIntensity: 0.5,
       });
       const decoration = new THREE.Mesh(geometry, material);
 
@@ -96,6 +100,9 @@ const BoxToPageAnimation = ({
       // 隨機縮放
       const scale = Math.random() * 0.5 + 0.5;
       decoration.scale.set(scale, scale, scale);
+
+      decoration.rotation.x += 0.01;
+      decoration.rotation.y += 0.01;
 
       scene.add(decoration);
       decorations.push(decoration);
@@ -176,7 +183,7 @@ const BoxToPageAnimation = ({
           1 - bgOpacity
         }), rgba(0, 0, 0, ${
           1 - bgOpacity
-        })), radial-gradient(circle at center, #fef3e2 0%, #fcf9d9 30%, #fce4e1 50%, #f7d1ee 70%, #e3d4f5 100%)`,
+        })), radial-gradient(circle at center, #0a2472 0%, #1e3b7e 30%, #274690 50%, #2f54c3 100%)`,
       }}
     >
       {!animationDone && <div ref={mountRef} className="w-full h-full"></div>}
