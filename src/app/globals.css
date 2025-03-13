@@ -151,10 +151,25 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .h1 {
   @apply text-6xl xl:text-[52px] xl:leading-[80px] tracking-[-2px] font-bold mx-2;
 }
 
 .badge {
   @apply z-10 w-[200px] h-[68px] bg-white dark:backdrop-blur-[44px] shadow-2xl p-4 rounded-[10px] flex items-center gap-x-4;
+}
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-in forwards;
+  }
 }

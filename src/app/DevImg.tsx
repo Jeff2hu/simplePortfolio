@@ -14,12 +14,12 @@ export default function DevImg({ containerStyles, imgSrc }: DevImgProps) {
       }}
     >
       <Image
-        width={250}
-        height={170}
+        width={300}
+        height={300}
         src={imgSrc}
         priority
         alt="developer"
-        className="absolute top-10 left-[10rem] rounded-full"
+        className="absolute top-14 left-[7rem] rounded-full"
       />
     </div>
   );
