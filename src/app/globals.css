@@ -131,23 +131,22 @@
   body {
     @apply bg-background text-foreground;
   }
-}
 
-@keyframes accordion-down {
-  from {
-    height: 0;
+  /* 自訂滾動條樣式 */
+  ::-webkit-scrollbar {
+    width: 8px;
   }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
-}
 
-@keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
   }
-  to {
-    height: 0;
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50 rounded-full dark:bg-primary/50;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/70 dark:bg-primary/70;
   }
 }
 
@@ -160,12 +159,22 @@
   }
 }
 
-.h1 {
-  @apply text-6xl xl:text-[52px] xl:leading-[80px] tracking-[-2px] font-bold mx-2;
-}
+@layer components {
+  .headerTitle {
+    @apply text-6xl xl:text-[52px] xl:leading-[80px] tracking-[-2px] font-bold mx-2 text-primary;
+  }
 
-.badge {
-  @apply z-10 w-[200px] h-[68px] bg-white dark:backdrop-blur-[44px] shadow-2xl p-4 rounded-[10px] flex items-center gap-x-4;
+  .badge {
+    @apply z-10 w-[200px] h-[68px] p-4 rounded-[10px] flex items-center gap-4 bg-primary/70 shadow-lg hover:scale-105 transition-transform duration-300;
+  }
+
+  .badgeSkill {
+    @apply bg-gradient-to-r text-white px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-transform duration-300;
+  }
+
+  .badgeText {
+    @apply text-primary-foreground dark:text-black;
+  }
 }
 
 @layer utilities {

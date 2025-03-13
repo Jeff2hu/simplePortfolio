@@ -4,11 +4,13 @@ import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
+type BoxToPageAnimationProps = {
+  setIsAnimationDone: (isAnimationDone: boolean) => void;
+};
+
 const BoxToPageAnimation = ({
-  onAnimationEnd,
-}: {
-  onAnimationEnd: () => void;
-}) => {
+  setIsAnimationDone,
+}: BoxToPageAnimationProps) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const [animationDone, setAnimationDone] = useState(false);
   const [bgOpacity, setBgOpacity] = useState(0);
@@ -145,7 +147,7 @@ const BoxToPageAnimation = ({
                   duration: 0.1,
                   onComplete: () => {
                     setAnimationDone(true);
-                    if (onAnimationEnd) onAnimationEnd();
+                    setIsAnimationDone(true);
                   },
                 });
               },
@@ -173,7 +175,7 @@ const BoxToPageAnimation = ({
         mountRef.current.removeChild(renderer.domElement);
       }
     };
-  }, [onAnimationEnd]);
+  }, [setIsAnimationDone]);
 
   return (
     <div

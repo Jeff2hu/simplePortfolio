@@ -1,3 +1,5 @@
+import RootLayout from "@/components/RootLayout";
+import { ThemeProvider } from "@/context/ThemeContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -20,18 +22,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ThemeProvider>
+      <RootLayout>{children}</RootLayout>
+    </ThemeProvider>
   );
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import CountUp from "react-countup";
 
 interface BadgeProps {
@@ -23,9 +21,9 @@ export default function Badge({
 }: BadgeProps) {
   return (
     <div className={`badge ${containerStyles}`}>
-      <div className="text-3xl text-primary">{icon}</div>
+      <div className="text-3xl">{icon}</div>
       <div className="flex items-center gap-x-2">
-        <div className="text-4xl leading-none font-bold text-primary">
+        <div className="text-4xl leading-none font-bold text-primary-foreground dark:text-black">
           <CountUp
             end={endCountNum}
             delay={1}
@@ -35,7 +33,7 @@ export default function Badge({
           {endCountText}
         </div>
         <div
-          className={`max-w-[70px] leading-none text-[15px] font-medium text-black text-center`}
+          className={`max-w-[70px] leading-none text-[15px] font-medium text-primary-foreground dark:text-black text-center`}
         >
           <span className={badgeTextStyles}>{badgeText}</span>
         </div>
