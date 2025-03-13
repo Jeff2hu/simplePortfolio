@@ -18,7 +18,8 @@ const BoxToPageAnimation = ({
     gsap.to(
       {},
       {
-        duration: 4,
+        delay: 0.15,
+        duration: 2,
         ease: "power2.inOut",
         onUpdate: function () {
           setBgOpacity(Math.min(this.progress() * 0.95, 0.85));
@@ -175,7 +176,7 @@ const BoxToPageAnimation = ({
           1 - bgOpacity
         }), rgba(0, 0, 0, ${
           1 - bgOpacity
-        })), radial-gradient(circle at center, #E6CAFF 0%, #ede9fe 50%, #f3e8ff 100%)`,
+        })), radial-gradient(circle at center, #fef3e2 0%, #fcf9d9 30%, #fce4e1 50%, #f7d1ee 70%, #e3d4f5 100%)`,
       }}
     >
       {!animationDone && <div ref={mountRef} className="w-full h-full"></div>}
