@@ -28,7 +28,7 @@ const BoxToPageAnimation = ({
     // 1. 建立場景
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      75,
+      40,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
@@ -46,7 +46,7 @@ const BoxToPageAnimation = ({
 
     // 添加背景裝飾
     const decorations = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 250; i++) {
       // 隨機選擇幾何體形狀
       let geometry;
       const shapeType = Math.floor(Math.random() * 4);
@@ -66,13 +66,13 @@ const BoxToPageAnimation = ({
 
       // 創建隨機顏色
       const randomColor = new THREE.Color(
-        Math.random() * 0.5 + 0.5,
-        Math.random() * 0.5 + 0.5,
-        Math.random() * 0.5 + 0.5
+        Math.random(),
+        Math.random(),
+        Math.random()
       );
       const material = new THREE.MeshStandardMaterial({
         color: randomColor,
-        opacity: 0.6,
+        opacity: 0.8,
         transparent: true,
         metalness: 0.3,
         roughness: 0.7,
@@ -101,7 +101,13 @@ const BoxToPageAnimation = ({
 
     // 2. 創建立方體
     const boxGeometry = new THREE.BoxGeometry();
-    const boxMaterial = new THREE.MeshStandardMaterial({ color: 0x0077ff });
+    const boxMaterial = new THREE.MeshStandardMaterial({
+      color: 0xaaaaff,
+      emissiveIntensity: 0.2,
+      opacity: 1,
+      metalness: 0.3,
+      roughness: 0.8,
+    });
     const box = new THREE.Mesh(boxGeometry, boxMaterial);
     scene.add(box);
 
@@ -111,7 +117,7 @@ const BoxToPageAnimation = ({
 
     // 4. 動畫 - 進入箱子
     gsap.to(camera.position, {
-      z: 2,
+      z: 5,
       duration: 7,
       ease: "power4.out",
       onComplete: () => {
@@ -138,8 +144,8 @@ const BoxToPageAnimation = ({
       requestAnimationFrame(animate);
 
       // 箱子旋轉
-      box.rotation.x += 0.005;
-      box.rotation.y += 0.005;
+      box.rotation.x += 0.01;
+      box.rotation.y += 0.01;
 
       // 移除裝飾物體的動畫，只保持靜止
       renderer.render(scene, camera);
@@ -161,7 +167,7 @@ const BoxToPageAnimation = ({
           1 - bgOpacity
         }), rgba(0, 0, 0, ${
           1 - bgOpacity
-        })), radial-gradient(circle at center, #e0e7ff 0%, #ede9fe 50%, #f3e8ff 100%)`,
+        })), radial-gradient(circle at center, #E6CAFF 0%, #ede9fe 50%, #f3e8ff 100%)`,
       }}
     >
       {!animationDone && <div ref={mountRef} className="w-full h-full"></div>}
