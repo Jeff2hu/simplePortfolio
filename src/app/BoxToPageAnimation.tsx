@@ -18,9 +18,10 @@ const BoxToPageAnimation = ({
     gsap.to(
       {},
       {
-        duration: 2,
+        duration: 4,
+        ease: "power2.inOut",
         onUpdate: function () {
-          setBgOpacity(this.progress());
+          setBgOpacity(Math.min(this.progress() * 0.95, 0.85));
         },
       }
     );
@@ -117,21 +118,28 @@ const BoxToPageAnimation = ({
 
     // 4. 動畫 - 進入箱子
     gsap.to(camera.position, {
-      z: 5,
-      duration: 7,
+      z: 7,
+      duration: 5,
       ease: "power4.out",
       onComplete: () => {
-        gsap.to(camera.position, {
-          z: 0.1,
-          duration: 0.5,
-          ease: "power1.in",
+        gsap.to(camera.rotation, {
+          y: Math.PI * 2, // Rotate 360 degrees
+          duration: 3,
+          ease: "power1.inOut",
           onComplete: () => {
-            gsap.to(renderer.domElement.style, {
-              opacity: 0,
-              duration: 0.1,
+            gsap.to(camera.position, {
+              z: 0.2,
+              duration: 0.5,
+              ease: "power1.in",
               onComplete: () => {
-                setAnimationDone(true);
-                if (onAnimationEnd) onAnimationEnd();
+                gsap.to(renderer.domElement.style, {
+                  opacity: 0,
+                  duration: 0.1,
+                  onComplete: () => {
+                    setAnimationDone(true);
+                    if (onAnimationEnd) onAnimationEnd();
+                  },
+                });
               },
             });
           },
