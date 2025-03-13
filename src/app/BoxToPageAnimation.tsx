@@ -9,7 +9,7 @@ const BoxToPageAnimation = ({
 }: {
   onAnimationEnd: () => void;
 }) => {
-  const mountRef = useRef(null);
+  const mountRef = useRef<HTMLDivElement>(null);
   const [animationDone, setAnimationDone] = useState(false);
 
   useEffect(() => {
@@ -135,7 +135,7 @@ const BoxToPageAnimation = ({
     animate();
 
     return () => {
-      if (mountRef.current) {
+      if (mountRef.current && renderer.domElement) {
         mountRef.current.removeChild(renderer.domElement);
       }
     };
