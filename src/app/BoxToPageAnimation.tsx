@@ -11,8 +11,20 @@ const BoxToPageAnimation = ({
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const [animationDone, setAnimationDone] = useState(false);
+  const [bgOpacity, setBgOpacity] = useState(0);
 
   useEffect(() => {
+    // 背景漸變動畫
+    gsap.to(
+      {},
+      {
+        duration: 2,
+        onUpdate: function () {
+          setBgOpacity(this.progress());
+        },
+      }
+    );
+
     // 1. 建立場景
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -21,7 +33,7 @@ const BoxToPageAnimation = ({
       0.1,
       1000
     );
-    camera.position.z = 30; // 初始位置，遠離箱子
+    camera.position.z = 50; // 初始位置，遠離箱子
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -100,7 +112,7 @@ const BoxToPageAnimation = ({
     // 4. 動畫 - 進入箱子
     gsap.to(camera.position, {
       z: 2,
-      duration: 4.5,
+      duration: 7,
       ease: "power4.out",
       onComplete: () => {
         gsap.to(camera.position, {
@@ -135,7 +147,7 @@ const BoxToPageAnimation = ({
     animate();
 
     return () => {
-      if (mountRef.current && renderer.domElement) {
+      if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
       }
     };
@@ -145,8 +157,11 @@ const BoxToPageAnimation = ({
     <div
       className="absolute top-0 left-0 w-full h-full"
       style={{
-        background:
-          "radial-gradient(circle at center, #e2e8f0 0%, #cbd5e1 50%, #94a3b8 100%)",
+        background: `linear-gradient(rgba(0, 0, 0, ${
+          1 - bgOpacity
+        }), rgba(0, 0, 0, ${
+          1 - bgOpacity
+        })), radial-gradient(circle at center, #e0e7ff 0%, #ede9fe 50%, #f3e8ff 100%)`,
       }}
     >
       {!animationDone && <div ref={mountRef} className="w-full h-full"></div>}

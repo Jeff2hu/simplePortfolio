@@ -231,12 +231,12 @@ export default function Home() {
                   </p>
                   <div className="space-y-2">
                     <p className="text-xl font-semibold">
-                      <p className="text-xl font-semibold">
-                        前端:{" "}
-                        <span className="text-primary font-bold">
-                          React + Zustand + Tailwind + Socket.io
-                        </span>
-                      </p>
+                      前端:{" "}
+                      <span className="text-primary font-bold">
+                        React + Zustand + Tailwind + Socket.io
+                      </span>
+                    </p>
+                    <p className="text-xl font-semibold">
                       後端:{" "}
                       <span className="text-primary font-bold">
                         Express + MongoDb + Socket.io
